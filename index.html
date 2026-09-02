@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Christopher Running - Software Engineer</title>
+<meta name="description" content="Christopher Running, software engineer in Orem, UT. Kubernetes, CI/CD, observability, and AI engineering.">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1b1b1f;
+    --muted: #5c5f66;
+    --rule: #e2e4e8;
+    --accent: #1f4e79;
+    --maxw: 820px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16181c;
+      --fg: #e6e8ec;
+      --muted: #9aa0aa;
+      --rule: #2c3038;
+      --accent: #7fb3e0;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .page {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  header { margin-bottom: 34px; }
+  h1 {
+    font-size: 2.1rem;
+    line-height: 1.15;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .tagline {
+    color: var(--muted);
+    font-size: 1rem;
+    margin: 0 0 12px;
+  }
+  .contact {
+    font-size: 0.94rem;
+    color: var(--muted);
+  }
+  .contact a { color: var(--accent); text-decoration: none; }
+  .contact a:hover { text-decoration: underline; }
+  .sep { padding: 0 8px; color: var(--rule); }
+
+  h2 {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.11em;
+    color: var(--muted);
+    font-weight: 600;
+    margin: 40px 0 14px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .job { margin-bottom: 26px; }
+  .job-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .role { font-weight: 600; font-size: 1.02rem; margin: 0; }
+  .org { font-weight: 400; color: var(--muted); }
+  .dates {
+    color: var(--muted);
+    font-size: 0.88rem;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .place {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin: 2px 0 8px;
+  }
+  ul { margin: 0; padding-left: 1.15em; }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--muted); }
+
+  .skills dt {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 12px;
+  }
+  .skills dd {
+    margin: 3px 0 0;
+    color: var(--fg);
+    font-size: 0.94rem;
+  }
+  .edu-line { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  footer {
+    margin-top: 48px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 0.84rem;
+  }
+  a { color: var(--accent); }
+
+  @media (max-width: 560px) {
+    .page { padding: 32px 18px 60px; }
+    h1 { font-size: 1.7rem; }
+    .dates { white-space: normal; }
+  }
+
+  @media print {
+    :root { --bg: #fff; --fg: #000; --muted: #444; --rule: #bbb; --accent: #000; }
+    body { font-size: 10.5pt; }
+    .page { max-width: none; padding: 0; }
+    h2 { margin: 18px 0 8px; }
+    .job { margin-bottom: 14px; page-break-inside: avoid; }
+    li { margin-bottom: 2px; }
+    footer { display: none; }
+    a { text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>Christopher Running</h1>
+    <p class="tagline">Software engineer. Infrastructure, CI/CD, observability, and AI engineering.</p>
+    <p class="contact">
+      Orem, UT
+      <span class="sep">|</span>
+      <a href="mailto:running.christopher@gmail.com">running.christopher@gmail.com</a>
+      <span class="sep">|</span>
+      <a href="https://linkedin.com/in/christopher-running" rel="noopener">LinkedIn</a>
+    </p>
+  </header>
+
+  <section>
+    <h2>Experience</h2>
+
+    <div class="job">
+      <div class="job-head">
+        <p class="role">Software Engineer II <span class="org">/ Qualtrics</span></p>
+        <span class="dates">Nov 2022 - Aug 2026</span>
+      </div>
+      <p class="place">Provo, UT</p>
+      <ul>
+        <li>Led multi-quarter migration of all 9 team services to Kubernetes and GitLab CI, retiring legacy Nomad and Jenkins infrastructure; authored migration documentation other teams adopted as a playbook for their own migrations.</li>
+        <li>Owned monitoring and alerting across New Relic, Splunk, Grafana, and Prometheus tooling; standardized dashboards, alert policies, and golden signal observability, cutting incident MTTR by ~30%.</li>
+        <li>Architected CI/CD system for the qualtrics.com replatform from WordPress to Drupal (1+ million pageviews monthly); primary technical liaison to hosting vendor (Acquia) through cutover.</li>
+        <li>Delivered cross-team projects (LMS certification platform) for Salesforce and Learning Management stakeholders; won Qualtrics' inaugural company-wide OneQ Award (2023), nominated by Customer Ops leadership.</li>
+        <li>Owned vulnerability triage, remediation (VMX, Nexpose, Arnica.io), and security on-call; drove a weekly remediation cadence that kept vulnerabilities within SLA, closing ~50 vulns per quarter.</li>
+        <li>Wrote AI skill files to reduce overall time to remediate vulnerabilities; AI reduced remediation round trip by 25% and released engineers to pursue other work in the interim.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <p class="role">Software Engineer I <span class="org">/ Qualtrics</span></p>
+        <span class="dates">May 2019 - Nov 2022</span>
+      </div>
+      <p class="place">Provo, UT</p>
+      <ul>
+        <li>Joined the on-call rotation in the first year, covering off-hours incident response and production triage.</li>
+        <li>Rebuilt team testing practice; raised unit coverage on all team microservices from under 30% to 80%.</li>
+        <li>Maintained www-api services (GeoIP language routing across 13 locales, lead-funnel management) and the www-payments invoicing portal ($20k+ weekly transactions), ensuring PCI compliance with Stripe infrastructure.</li>
+        <li>Co-built the Certification Service (Node.js/Express REST API) powering the company LMS; processed 100+ exams weekly and provisioned ~30 sandbox accounts daily.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <p class="role">Engineering Intern <span class="org">/ Wavetronix</span></p>
+        <span class="dates">Apr 2018 - Apr 2019</span>
+      </div>
+      <p class="place">Provo, UT</p>
+      <ul>
+        <li>Led a team of 4 interns developing real-time traffic-radar algorithms on TI microcontrollers; was retained beyond internship at management's request to continue the project.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <p class="role">Web Developer <span class="org">/ Brigham Young University</span></p>
+        <span class="dates">Apr 2017 - Apr 2019</span>
+      </div>
+      <p class="place">Provo, UT</p>
+      <ul>
+        <li>Supported and maintained the Drupal site for the McKay School of Education, building interactive learning modules.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <p class="role">Systems Engineer <span class="org">/ OAS Solar Research Group</span></p>
+        <span class="dates">Jan 2015 - Dec 2017</span>
+      </div>
+      <p class="place">Provo, UT</p>
+      <ul>
+        <li>Led an 11-student research team studying applied solar power; secured $25k in grants for solar panel prototyping.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Projects</h2>
+
+    <div class="job">
+      <div class="job-head">
+        <p class="role">TheAlgoCatalog</p>
+        <span class="dates">2026</span>
+      </div>
+      <ul>
+        <li>Built a subscription algorithmic-trading strategy catalog using agentic development (Claude Code); deployed on DigitalOcean behind Caddy and Cloudflare.</li>
+        <li>Designed an LLM agent pipeline that researches, backtests, verifies, and stages trading strategies.</li>
+        <li>Ships via PR-gated deploys (GitHub Actions); includes analytics, email delivery, and a payment portal. Added monitoring, alerting, and metrics for observability. Live at <a href="https://algo-catalog.com" rel="noopener">algo-catalog.com</a>.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <p class="role">TinyHomeBuilders <span class="org">/ Founder</span></p>
+        <span class="dates">2020 - 2022</span>
+      </div>
+      <ul>
+        <li>Built three tiny homes on wheels; sold each for 2x build cost.</li>
+        <li>Navigated novel construction methods, legal requirements, and marketing tactics.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <div class="job">
+      <div class="edu-line">
+        <p class="role">Brigham Young University <span class="org">/ Provo, UT</span></p>
+        <span class="dates">Apr 2019</span>
+      </div>
+      <p class="place">Bachelor of Science in Computer Engineering, Minor in Computer Science</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Technical Skills</h2>
+    <dl class="skills">
+      <dt>Platforms</dt>
+      <dd>AWS (EKS, EC2, S3, RDS), Kubernetes, Docker, GitLab CI, GitHub Actions, Jenkins, Spinnaker, Nomad, Rundeck, NGINX, Cloudflare, DNS, load balancing</dd>
+
+      <dt>Practices</dt>
+      <dd>CI/CD, incident response and on-call, monitoring and alerting, vulnerability remediation, code review, unit and end-to-end testing</dd>
+
+      <dt>Observability and testing</dt>
+      <dd>New Relic (NRQL, Synthetic Monitors), Prometheus, OpenTelemetry, Grafana, Splunk, Splunk On-Call (VictorOps), Playwright, Vitest, PHPUnit</dd>
+
+      <dt>Languages</dt>
+      <dd>Python, JavaScript, TypeScript, SQL, PHP, C++</dd>
+
+      <dt>Frameworks and data</dt>
+      <dd>Node.js, Express, NestJS, PostgreSQL, Redis, MongoDB, React/Next.js, Vue, Drupal, WordPress</dd>
+
+      <dt>AI engineering</dt>
+      <dd>MCP server design and OAuth authentication (Descope), Anthropic API, LangChain, GalileoAI, Claude Code, prompt and context engineering, LLM agent harness design, verification-driven agentic workflows</dd>
+    </dl>
+  </section>
+
+  <footer>
+    Phone number available on request. Print this page for a PDF copy.
+  </footer>
+
+</div>
+</body>
+</html>
