@@ -29,8 +29,9 @@
   function skeleton() {
     const page = $('#app'); page.replaceChildren();
     const hero = h('div', 'hero'); page.appendChild(hero);
-    const brand = h('div', 'brand'); brand.appendChild(h('h1', null, 'Dashforge')); brand.appendChild(h('span', 'sub', 'Describe the person. Get their dashboard.')); const perm = h('span', 'perm', window.DASHFORGE_NAME || 'custom'); brand.appendChild(perm); hero.appendChild(brand);
-    const form = h('form', 'prompt'); const inp = h('input'); inp.id = 'q'; inp.placeholder = ''; inp.autocomplete = 'off'; inp.setAttribute('aria-label', 'Describe who the dashboard is for'); form.appendChild(inp); const go = h('button', null, 'Build dashboard'); go.type = 'submit'; form.appendChild(go); hero.appendChild(form);
+    const brand = h('div', 'brand'); brand.appendChild(h('h1', null, 'Dashforge')); brand.appendChild(h('span', 'sub', 'An agent that builds custom dashboards.')); const perm = h('span', 'perm', window.DASHFORGE_NAME || 'custom'); brand.appendChild(perm); hero.appendChild(brand);
+    hero.appendChild(h('div', 'ask', 'Describe the business employee this dashboard is for, in plain language. For example: "a regional sales manager who runs the West territory" or "a customer service rep working billing tickets".'));
+    const form = h('form', 'prompt'); const inp = h('input'); inp.id = 'q'; inp.placeholder = 'Who is this dashboard for?'; inp.autocomplete = 'off'; inp.setAttribute('aria-label', 'Describe who the dashboard is for'); form.appendChild(inp); const go = h('button', null, 'Build dashboard'); go.type = 'submit'; form.appendChild(go); hero.appendChild(form);
     form.addEventListener('submit', ev => { ev.preventDefault(); build(inp.value.trim() || 'General manager'); });
 
     const tb = h('div', 'toolbar'); tb.id = 'toolbar'; page.appendChild(tb);

@@ -30,6 +30,7 @@ button { font: inherit; color: inherit; }
 .brand h1 { font-size: 20px; }
 .brand .sub { color: var(--ink-secondary); font-size: 14px; }
 .brand .perm { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--accent-wash); color: var(--ink-secondary); margin-left: auto; }
+.ask { font-size: 15px; color: var(--ink-primary); margin: 0 0 10px; }
 .prompt { display: flex; gap: 10px; }
 .prompt input { flex: 1; padding: 14px 16px; border: 2px solid var(--accent); border-radius: 10px; background: var(--page); color: var(--ink-primary); font-size: 19px; }
 .prompt input:focus { outline: none; box-shadow: 0 0 0 4px var(--accent-wash); }
