@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashforge permutations</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="hub">
+<h1>Dashforge: permutations for review</h1>
+<p class="lead">One simulated company (Northpeak Software, 90 days, pre-generated). Every page builds a dashboard for whatever role you type, from the same data. Pages differ only in which features are on; every page has a Features row where you can flip any of them, so these are starting points, not walls.</p>
+<div class="cards">
+<a class="card" href="lean.html"><span class="n">Permutation 1</span><h2>Lean</h2><p>The four I would ship first under a timer.</p><ul><li>Role chips (same world, other seat)</li><li>Time scrubber over 90 days</li><li>Alerts that point to a chart</li><li>KPI drill-down, live alert after render</li><li>Tables: sort and filter on every column</li></ul></a>
+<a class="card" href="story.html"><span class="n">Permutation 2</span><h2>Story</h2><p>Lean plus the two cheap axiom-sellers.</p><ul><li>Story ribbon: both events on every dashboard, lit or dimmed by role</li><li>Reconciliation footer: same numbers on every page</li></ul></a>
+<a class="card" href="flow.html"><span class="n">Permutation 3</span><h2>Flow</h2><p>Story plus the one picture that is the axiom.</p><ul><li>Marketing to sales to support band diagram on top of every dashboard</li></ul></a>
+<a class="card" href="full.html"><span class="n">Permutation 4</span><h2>Full</h2><p>Everything, including the alternate chart forms and control dimming.</p><ul><li>Bullet bars, small multiples, ARR waterfall, arrival heatmap, CPL slope, rep dot strip (swapped in per role)</li><li>Charts outside the role's control render dimmed</li></ul></a>
+</div>
+<h2 class="sec">How to practice prompting here</h2>
+<ol>
+<li>Type a role in the box (or click an example). The local planner builds the dashboard with no network call.</li>
+<li>Open "Agent prompt" at the bottom. That is the exact prompt the server sends to the model, with the data digest as of the scrubber date.</li>
+<li>Copy it into Claude, paste the JSON reply back, click Render. Or enter an API key in the optional box to call the model directly from the browser (key stays in memory).</li>
+<li>Deep link a request: <code>lean.html?q=support%20agent</code>. Deep link features: <code>#flow=1&amp;altForms=1</code>.</li>
+</ol>
+<h2 class="sec">What is deterministic and what the model decides</h2>
+<ul>
+<li>Engine (world.json): every number, series, table row, and alert. Two injected events: paid CPC spike on day 45, v4.2 release on day 63.</li>
+<li>Model or fallback planner: role card, which KPIs and blocks, layout widths, insight text, what was left off and why, which alert domains are in focus.</li>
+</ul>
+</div>
+</body>
+</html>
