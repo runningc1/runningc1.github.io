@@ -2,8 +2,8 @@
    Flags: roleChips, scrubber, alertsPoint, storyRibbon, footer, flow, altForms, drilldown, controlDim, liveAlert */
 (function () {
   'use strict';
-  const DEFAULT_FLAGS = { roleChips: true, scrubber: true, alertsPoint: true, storyRibbon: false, footer: false, flow: false, altForms: false, drilldown: true, controlDim: false, liveAlert: true };
-  const FLAG_LABELS = { roleChips: 'Role chips', scrubber: 'Time scrubber', alertsPoint: 'Alerts that point', storyRibbon: 'Story ribbon', footer: 'Reconciliation footer', flow: 'Flow diagram', altForms: 'Alternate chart forms', drilldown: 'KPI drill-down', controlDim: 'Dim what the role cannot control', liveAlert: 'Live alert after render' };
+  const DEFAULT_FLAGS = { scrubber: true, alertsPoint: true, storyRibbon: false, footer: false, flow: false, altForms: false, drilldown: true, controlDim: false, liveAlert: true };
+  const FLAG_LABELS = { scrubber: 'Time scrubber', alertsPoint: 'Alerts that point', storyRibbon: 'Story ribbon', footer: 'Reconciliation footer', flow: 'Flow diagram', altForms: 'Alternate chart forms', drilldown: 'KPI drill-down', controlDim: 'Dim what the role cannot control', liveAlert: 'Live alert after render' };
   const EXAMPLES = ['VP of Sales', 'Marketing manager', 'Head of customer support', 'Support agent on the technical queue', 'Customer success manager', 'General manager', 'Demand gen lead', 'RevOps analyst'];
 
   const App = { world: null, day: 89, plan: null, flags: null, lastText: '' };
@@ -28,11 +28,10 @@
 
   function skeleton() {
     const page = $('#app'); page.replaceChildren();
-    const top = h('div', 'top'); page.appendChild(top);
-    const brand = h('div', 'brand'); brand.appendChild(h('h1', null, 'Dashforge')); brand.appendChild(h('span', 'sub', 'one company, any lens')); const perm = h('span', 'perm', window.DASHFORGE_NAME || 'custom'); brand.appendChild(perm); top.appendChild(brand);
-    const form = h('form', 'prompt'); const inp = h('input'); inp.id = 'q'; inp.placeholder = 'Who is this dashboard for? e.g. "the head of customer support"'; inp.autocomplete = 'off'; form.appendChild(inp); const go = h('button', null, 'Build'); go.type = 'submit'; form.appendChild(go); top.appendChild(form);
+    const hero = h('div', 'hero'); page.appendChild(hero);
+    const brand = h('div', 'brand'); brand.appendChild(h('h1', null, 'Dashforge')); brand.appendChild(h('span', 'sub', 'Describe the person. Get their dashboard.')); const perm = h('span', 'perm', window.DASHFORGE_NAME || 'custom'); brand.appendChild(perm); hero.appendChild(brand);
+    const form = h('form', 'prompt'); const inp = h('input'); inp.id = 'q'; inp.placeholder = ''; inp.autocomplete = 'off'; inp.setAttribute('aria-label', 'Describe who the dashboard is for'); form.appendChild(inp); const go = h('button', null, 'Build dashboard'); go.type = 'submit'; form.appendChild(go); hero.appendChild(form);
     form.addEventListener('submit', ev => { ev.preventDefault(); build(inp.value.trim() || 'General manager'); });
-    const ex = h('div', 'examples'); EXAMPLES.forEach(t => { const b = h('button', null, t); b.type = 'button'; b.addEventListener('click', () => { inp.value = t; build(t); }); ex.appendChild(b); }); page.appendChild(ex);
 
     const tb = h('div', 'toolbar'); tb.id = 'toolbar'; page.appendChild(tb);
     page.appendChild(h('div', null)).id = 'stage';
@@ -43,11 +42,6 @@
 
   function toolbar() {
     const tb = $('#toolbar'); tb.replaceChildren();
-    if (App.flags.roleChips) {
-      const r = h('div', 'roles'); r.appendChild(h('span', 'label', 'Same world, other seat'));
-      Planner.ARCHETYPES.forEach(a => { const b = h('button', 'chip' + (App.plan && App.plan.role_card.title === a.title ? ' active' : ''), a.title); b.type = 'button'; b.addEventListener('click', () => { $('#q').value = a.title; build(a.title, { instant: true }); }); r.appendChild(b); });
-      tb.appendChild(r);
-    }
     if (App.flags.scrubber) {
       const s = h('div', 'scrub'); s.appendChild(h('span', 'label', 'As of'));
       const rng = h('input'); rng.type = 'range'; rng.min = 14; rng.max = 89; rng.value = App.day; s.appendChild(rng);
@@ -238,8 +232,7 @@
     await loadWorld();
     skeleton();
     const q = new URLSearchParams(location.search).get('q');
-    const first = q || (window.DASHFORGE_FIRST || 'Head of customer support');
-    $('#q').value = first; build(first, { instant: !!q });
+    if (q) { $('#q').value = q; build(q, { instant: true }); } else $('#q').focus();
     let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (App.plan) renderDash(); }, 200); });
   }
   document.addEventListener('DOMContentLoaded', boot);

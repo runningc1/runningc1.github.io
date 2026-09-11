@@ -24,18 +24,22 @@ a { color: var(--accent); }
 h1, h2, h3 { font-weight: 600; margin: 0; }
 button { font: inherit; color: inherit; }
 
-/* header / prompt */
-.top { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-.brand { display: flex; align-items: baseline; gap: 10px; }
-.brand h1 { font-size: 18px; }
-.brand .sub { color: var(--ink-muted); font-size: 12px; }
-.brand .perm { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--accent-wash); color: var(--ink-secondary); }
-.prompt { display: flex; gap: 8px; flex: 1 1 420px; }
-.prompt input { flex: 1; padding: 10px 12px; border: 1px solid var(--axis); border-radius: 8px; background: var(--surface); color: var(--ink-primary); font-size: 15px; }
-.prompt button, .btn { padding: 10px 14px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: #fff; font-weight: 600; cursor: pointer; }
+/* hero prompt */
+.hero { margin: 0 0 14px; padding: 18px 20px 14px; background: var(--surface); border: 1px solid var(--border); border-top: 4px solid var(--accent); border-radius: 12px; }
+.brand { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+.brand h1 { font-size: 20px; }
+.brand .sub { color: var(--ink-secondary); font-size: 14px; }
+.brand .perm { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--accent-wash); color: var(--ink-secondary); margin-left: auto; }
+.prompt { display: flex; gap: 10px; }
+.prompt input { flex: 1; padding: 14px 16px; border: 2px solid var(--accent); border-radius: 10px; background: var(--page); color: var(--ink-primary); font-size: 19px; }
+.prompt input:focus { outline: none; box-shadow: 0 0 0 4px var(--accent-wash); }
+.prompt button { padding: 14px 22px; border-radius: 10px; border: 1px solid var(--accent); background: var(--accent); color: #fff; font-weight: 600; font-size: 16px; cursor: pointer; white-space: nowrap; }
+.btn { padding: 10px 14px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: #fff; font-weight: 600; cursor: pointer; }
+@media (max-width: 640px) { .prompt { flex-direction: column; } }
 .btn.ghost { background: transparent; color: var(--ink-primary); border-color: var(--axis); font-weight: 500; }
 .btn.small { padding: 5px 10px; font-size: 12px; }
-.examples { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 12px; }
+.examples { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; align-items: center; }
+.examples .label { font-size: 11px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .04em; margin-right: 4px; }
 .examples button, .chip { border: 1px solid var(--axis); background: var(--surface); border-radius: 999px; padding: 4px 10px; font-size: 12px; cursor: pointer; color: var(--ink-secondary); }
 .examples button:hover, .chip:hover { border-color: var(--accent); color: var(--ink-primary); }
 .chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
