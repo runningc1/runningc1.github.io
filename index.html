@@ -2,277 +2,599 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Christopher Running - Software Engineer</title>
-<meta name="description" content="Christopher Running, software engineer. Kubernetes, CI/CD, observability, and AI engineering.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Christopher Running</title>
+<meta name="description" content="Christopher Running, full stack software engineer in Utah. Seven years at Qualtrics on qualtrics.com, plus software and hardware projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Public+Sans:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-  :root {
-    --bg: #ffffff;
-    --fg: #1b1b1f;
-    --muted: #5c5f66;
-    --rule: #e2e4e8;
-    --accent: #1f4e79;
-    --maxw: 820px;
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+/* Layout: sticky left rail (identity + lens filter + section nav), one reading column on the right; stacks to one column on phones. */
+:root {
+  --paper: #f4f6f5;
+  --sheet: #ffffff;
+  --ink: #18201e;
+  --muted: #59645f;
+  --rule: #d8dedb;
+  --accent: #2547a3;
+  --accent-soft: #e4e9f6;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Public Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #111514; --sheet: #171c1b; --ink: #e3e8e6; --muted: #98a39f;
+    --rule: #2a3230; --accent: #93abf0; --accent-soft: #1d2643; color-scheme: dark;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #16181c;
-      --fg: #e6e8ec;
-      --muted: #9aa0aa;
-      --rule: #2c3038;
-      --accent: #7fb3e0;
-    }
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--fg);
-    font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  }
-  .page {
-    max-width: var(--maxw);
-    margin: 0 auto;
-    padding: 48px 24px 80px;
-  }
-  header { margin-bottom: 34px; }
-  h1 {
-    font-size: 2.1rem;
-    line-height: 1.15;
-    margin: 0 0 6px;
-    letter-spacing: -0.02em;
-  }
-  .tagline {
-    color: var(--muted);
-    font-size: 1rem;
-    margin: 0 0 12px;
-  }
-  .contact {
-    font-size: 0.94rem;
-    color: var(--muted);
-  }
-  .contact a { color: var(--accent); text-decoration: none; }
-  .contact a:hover { text-decoration: underline; }
-  .sep { padding: 0 8px; color: var(--rule); }
+}
+:root[data-theme="dark"] {
+  --paper: #111514; --sheet: #171c1b; --ink: #e3e8e6; --muted: #98a39f;
+  --rule: #2a3230; --accent: #93abf0; --accent-soft: #1d2643; color-scheme: dark;
+}
 
-  h2 {
-    font-size: 0.82rem;
-    text-transform: uppercase;
-    letter-spacing: 0.11em;
-    color: var(--muted);
-    font-weight: 600;
-    margin: 40px 0 14px;
-    padding-bottom: 7px;
-    border-bottom: 1px solid var(--rule);
-  }
-  .job { margin-bottom: 26px; }
-  .job-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .role { font-weight: 600; font-size: 1.02rem; margin: 0; }
-  .org { font-weight: 400; color: var(--muted); }
-  .dates {
-    color: var(--muted);
-    font-size: 0.88rem;
-    white-space: nowrap;
-    font-variant-numeric: tabular-nums;
-  }
-  .place {
-    color: var(--muted);
-    font-size: 0.88rem;
-    margin: 2px 0 8px;
-  }
-  ul { margin: 0; padding-left: 1.15em; }
-  li { margin-bottom: 6px; }
-  li::marker { color: var(--muted); }
+* { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.55 var(--font-body);
+  padding-inline: 16px;
+}
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
 
-  .skills dt {
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-top: 12px;
-  }
-  .skills dd {
-    margin: 3px 0 0;
-    color: var(--fg);
-    font-size: 0.94rem;
-  }
-  .edu-line { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  footer {
-    margin-top: 48px;
-    padding-top: 16px;
-    border-top: 1px solid var(--rule);
-    color: var(--muted);
-    font-size: 0.84rem;
-  }
-  a { color: var(--accent); }
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-block: 48px 72px;
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 56px;
+}
 
-  @media (max-width: 560px) {
-    .page { padding: 32px 18px 60px; }
-    h1 { font-size: 1.7rem; }
-    .dates { white-space: normal; }
-  }
+/* Rail */
+.rail { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 32px); align-self: start; display: grid; gap: 28px; }
+.name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.35rem;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-wrap: balance;
+}
+.role { margin: 10px 0 0; font-weight: 600; }
+.loc { margin: 2px 0 0; color: var(--muted); font-size: 0.92rem; }
+.links { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.92rem; margin: 0; padding: 0; list-style: none; }
 
-  @media print {
-    :root { --bg: #fff; --fg: #000; --muted: #444; --rule: #bbb; --accent: #000; }
-    body { font-size: 10.5pt; }
-    .page { max-width: none; padding: 0; }
-    h2 { margin: 18px 0 8px; }
-    .job { margin-bottom: 14px; page-break-inside: avoid; }
-    li { margin-bottom: 2px; }
-    footer { display: none; }
-    a { text-decoration: none; }
-  }
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+.lens-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  font: 500 0.82rem var(--font-body);
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--sheet); }
+.lens-count { margin: 10px 0 0; font-family: var(--font-mono); font-size: 0.76rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.toc { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: 0.92rem; }
+.toc a { color: var(--muted); text-decoration: none; }
+.toc a:hover { color: var(--accent); }
+
+/* Main column */
+main { min-width: 0; max-width: 720px; }
+.intro { font-size: 1.12rem; line-height: 1.6; margin: 0 0 8px; }
+.intro + .intro { font-size: 1rem; color: var(--muted); }
+
+section { margin-top: 56px; }
+section > h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+  margin: 0 0 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+section > h2 small { font: 400 0.74rem var(--font-mono); color: var(--muted); letter-spacing: 0.04em; }
+
+.entries { display: grid; gap: 30px; }
+.entry { transition: opacity 0.2s; }
+.entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4px 16px; flex-wrap: wrap; }
+.entry h3 { font-size: 1.04rem; font-weight: 600; margin: 0; text-wrap: balance; }
+.entry h3 .org { font-weight: 400; color: var(--muted); }
+.dates { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.meta { margin: 3px 0 0; font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.scope { margin: 8px 0 0; font-style: italic; color: var(--muted); font-size: 0.95rem; }
+.entry ul { margin: 10px 0 0; padding-left: 1.1em; display: grid; gap: 7px; }
+.entry li { transition: opacity 0.2s; }
+.entry li::marker { color: var(--accent); }
+.entry li.hit { background: var(--accent-soft); box-shadow: -1.1em 0 0 var(--accent-soft), 6px 0 0 var(--accent-soft); border-radius: 2px; }
+
+.dim { opacity: 0.32; }
+
+.subhead { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 36px 0 16px; }
+
+.skills { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 12px 20px; margin: 0; }
+.skills dt { font-weight: 600; font-size: 0.92rem; transition: opacity 0.2s; }
+.skills dd { margin: 0; font-size: 0.94rem; transition: opacity 0.2s; }
+
+footer { margin-top: 64px; padding-top: 14px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.84rem; }
+
+@media (max-width: 880px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 32px; padding-block: 28px 56px; }
+  .rail { position: static; gap: 20px; }
+  .toc { display: none; }
+  .name { font-size: 2rem; }
+}
+@media (max-width: 520px) {
+  .skills { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .skills dd { margin-bottom: 10px; }
+  .dates { white-space: normal; }
+}
+@media (prefers-reduced-motion: reduce) { .entry, .entry li, .skills dt, .skills dd { transition: none; } }
+@media print {
+  body { background: #fff; color: #000; padding: 0; font-size: 10pt; }
+  .wrap { display: block; padding: 0; }
+  .rail { position: static; }
+  .lens, .toc, footer { display: none; }
+  .dim { opacity: 1; }
+  .entry li.hit { background: none; box-shadow: none; }
+  section { margin-top: 18px; }
+  .entry { break-inside: avoid; }
+}
 </style>
 </head>
 <body>
-<div class="page">
 
-  <header>
-    <h1>Christopher Running</h1>
-    <p class="tagline">Software engineer. Infrastructure, CI/CD, observability, and AI engineering.</p>
-    <p class="contact">
-      Please reach out through
-      <a href="https://linkedin.com/in/christopher-running" rel="noopener">LinkedIn</a>.
-    </p>
-  </header>
-
-  <section>
-    <h2>Experience</h2>
-
-    <div class="job">
-      <div class="job-head">
-        <p class="role">Software Engineer II <span class="org">/ Qualtrics</span></p>
-        <span class="dates">Nov 2022 - Aug 2026</span>
+<div class="wrap">
+  <aside class="rail">
+    <div>
+      <h1 class="name">Christopher Running</h1>
+      <p class="role">Full stack software engineer</p>
+      <p class="loc">Utah County</p>
+    </div>
+    <ul class="links">
+      <li><a href="https://linkedin.com/in/christopher-running" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://github.com/runningc1" rel="noopener">GitHub</a></li>
+      <li><a href="https://algo-catalog.com" rel="noopener">algo-catalog.com</a></li>
+    </ul>
+    <div class="lens">
+      <p class="label" id="lens-label">Highlight work for</p>
+      <div class="lens-chips" role="group" aria-labelledby="lens-label">
+        <button class="chip" id="lens-all" data-lens="all" aria-pressed="true">Everything</button>
+        <button class="chip" id="lens-fullstack" data-lens="fullstack" aria-pressed="false">Full stack</button>
+        <button class="chip" id="lens-backend" data-lens="backend" aria-pressed="false">Backend</button>
+        <button class="chip" id="lens-ai" data-lens="ai" aria-pressed="false">AI</button>
+        <button class="chip" id="lens-platform" data-lens="platform" aria-pressed="false">Platform</button>
+        <button class="chip" id="lens-hardware" data-lens="hardware" aria-pressed="false">Hardware</button>
       </div>
-      <p class="place">Provo, UT</p>
-      <ul>
-        <li>Led multi-quarter migration of all 9 team services to Kubernetes and GitLab CI, retiring legacy Nomad and Jenkins infrastructure; authored migration documentation other teams adopted as a playbook for their own migrations.</li>
-        <li>Owned monitoring and alerting across New Relic, Splunk, Grafana, and Prometheus tooling; standardized dashboards, alert policies, and golden signal observability, cutting incident MTTR by ~30%.</li>
-        <li>Architected CI/CD system for the qualtrics.com replatform from WordPress to Drupal (1+ million pageviews monthly); primary technical liaison to hosting vendor (Acquia) through cutover.</li>
-        <li>Delivered cross-team projects (LMS certification platform) for Salesforce and Learning Management stakeholders; won Qualtrics' inaugural company-wide OneQ Award (2023), nominated by Customer Ops leadership.</li>
-        <li>Owned vulnerability triage, remediation (VMX, Nexpose, Arnica.io), and security on-call; drove a weekly remediation cadence that kept vulnerabilities within SLA, closing ~50 vulns per quarter.</li>
-        <li>Wrote AI skill files to reduce overall time to remediate vulnerabilities; AI reduced remediation round trip by 25% and released engineers to pursue other work in the interim.</li>
+      <p class="lens-count" id="lens-count" aria-live="polite"></p>
+    </div>
+    <nav aria-label="Sections">
+      <ul class="toc">
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#software">Software projects</a></li>
+        <li><a href="#hardware">Hardware and shop</a></li>
+        <li><a href="#ventures">Businesses</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Skills</a></li>
       </ul>
-    </div>
+    </nav>
+  </aside>
 
-    <div class="job">
-      <div class="job-head">
-        <p class="role">Software Engineer I <span class="org">/ Qualtrics</span></p>
-        <span class="dates">May 2019 - Nov 2022</span>
+  <main>
+    <p class="intro">I spent seven years at Qualtrics on the five-person team that builds and runs qualtrics.com and its nine production services. I worked across the stack: React and Drupal front ends, Node.js and Python back ends, the site API, the invoicing portal, and the tests, deploys, and on-call that kept them running.</p>
+    <p class="intro">Outside software I build hardware in my own shop. I have built three CNC machines and designed a model-railroad command station board in KiCad, and I have started two small businesses. Everything from every version of my resume is on this page. Pick a role above to highlight the parts that apply to it.</p>
+
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="entries">
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Prototyping Engineer <span class="org">/ CMIC</span></h3>
+            <span class="dates">Aug 2026 - present</span>
+          </div>
+          <p class="meta">Mechanical engineering consulting. Client work is under NDA.</p>
+          <ul>
+            <li data-t="hardware">Build physical prototypes for client projects in wood, adhesives, and plastics, including water-sealed assemblies, and design and build the jigs to make them.</li>
+            <li data-t="hardware">Model a full-size client prototype in Autodesk Fusion with real materials assigned so the team can estimate its weight.</li>
+            <li data-t="fullstack backend platform">Built the company website (compliantmechanism.com): front end, back end, tests, deployment, and the e-commerce admin.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Software Engineer II <span class="org">/ Qualtrics</span></h3>
+            <span class="dates">Nov 2022 - Aug 2026</span>
+          </div>
+          <p class="meta">Provo, UT</p>
+          <p class="scope">One of 5 engineers owning qualtrics.com and its 9 production services, from Marketing's pages to the APIs and payment systems behind them. Owned features end to end with a PM and designer, plus the team's on-call, security, CI/CD, and AI tooling.</p>
+          <ul>
+            <li data-t="ai backend fullstack">Built an MCP server (Python, FastAPI) that lets Marketing create qualtrics.com pages from natural language by composing the site's existing Drupal components. Every tool call is traced to its user in Galileo via OpenTelemetry.</li>
+            <li data-t="ai backend">Built the MCP server's auth as a swappable layer and switched it between Descope, Google OIDC, and an in-house provider as security requirements changed.</li>
+            <li data-t="backend fullstack">Took sole ownership of the LMS certification platform after layoffs eliminated its team; got it Sev-1 certified, wrote its runbooks, and trained the Basecamp team to issue promo codes themselves.</li>
+            <li data-t="fullstack backend">Converted 4,000+ pages from WordPress to Drupal with a migration service I built, saving Marketing 90+ person-hours.</li>
+            <li data-t="fullstack">Built and updated 20+ Drupal components and content types (Twig, Tailwind, PHP) to Marketing's design specs across screen sizes.</li>
+            <li data-t="platform backend fullstack">Led the migration of all 9 services behind qualtrics.com (1M+ monthly pageviews) from Nomad and Jenkins to Kubernetes and GitLab CI, and architected the CI/CD that shipped the site's WordPress-to-Drupal replatform. Main technical contact with Acquia, the hosting vendor, through cutover.</li>
+            <li data-t="platform backend">Standardized dashboards and alert policies across New Relic, Splunk, and Grafana, cutting incident MTTR about 30%. Team Security Champion on the security on-call rotation.</li>
+            <li data-t="ai platform">Automated weekly vulnerability remediation with Claude agents that apply fixes and open merge requests with unit and API tests for human review, cutting remediation turnaround 25%.</li>
+            <li data-t="ai">Designed and piloted two agent methodologies in Claude Code ("Scientific Assertion" and "Self-Replication"), and presented a root-cause analysis of the team's AI token spend to my manager and team.</li>
+            <li data-t="ai fullstack backend">Trained the other 4 engineers on the team in Claude Code and Cursor through recurring sessions on prompting and agentic workflows.</li>
+            <li data-t="fullstack backend platform">Built and documented the onboarding program that cut new-engineer ramp-up from 8 weeks to 6, and mentored 2 new engineers through it.</li>
+            <li data-t="backend platform">Wrote the technical plans for the Kubernetes migration, the Drupal cutover, and the alert-policy standard; set the team's GitLab merge request checklist and reviewed teammates' merge requests against it.</li>
+            <li data-t="backend platform">Traced error-log spam to a careers-page script that POSTed to a nonexistent qualtrics.com endpoint on every load and spent against the domain's paid traffic ceiling; found the correct endpoint and got the owning team to fix it.</li>
+            <li data-t="fullstack backend ai platform hardware">Won Qualtrics' inaugural company-wide OneQ Award (2023), nominated by Customer Ops leadership, for cross-team delivery of the LMS certification platform with Salesforce stakeholders.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Software Engineer I <span class="org">/ Qualtrics</span></h3>
+            <span class="dates">May 2019 - Nov 2022</span>
+          </div>
+          <p class="meta">Provo, UT</p>
+          <ul>
+            <li data-t="fullstack backend">Co-architected the certification platform behind Qualtrics' LMS (Node.js/Express REST API, React), integrating Skilljar, ProctorU, Mailchimp/Mandrill, and Salesforce. It handles 100+ exams weekly and provisions about 30 sandbox accounts daily.</li>
+            <li data-t="fullstack">Built the certification platform's React front end, from exam forms and notices to a promo-code admin with full CRUD, and later refactored its component structure for rendering efficiency.</li>
+            <li data-t="fullstack backend">Kept the qualtrics.com invoicing portal ($20k+ weekly transactions) PCI compliant by moving checkout to Stripe's hosted payment components. Made its payment flows testable outside production and added exchange-rate storage for multi-currency invoices.</li>
+            <li data-t="backend">Owned www-api, the site API with external consumers: GeoIP language routing across 13 locales and lead-funnel handling.</li>
+            <li data-t="fullstack backend platform">Raised unit test coverage from 30% to 80% across all 9 team microservices by rebuilding the team's testing practice: unit, API contract, and Playwright end-to-end suites.</li>
+            <li data-t="fullstack">Cut Marketing site page load time 8% on average with React components and simpler WordPress/Drupal page structure.</li>
+            <li data-t="platform backend">Dockerized the team's services, moved them from raw VMs to Nomad, and joined the on-call rotation in my first year.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Engineering Intern <span class="org">/ Wavetronix</span></h3>
+            <span class="dates">May 2018 - Feb 2019</span>
+          </div>
+          <p class="meta">Provo, UT</p>
+          <ul>
+            <li data-t="hardware">Led 4 interns building real-time traffic-radar algorithms on TI microcontrollers; management extended my internship to continue the project.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Web Developer <span class="org">/ Brigham Young University</span></h3>
+            <span class="dates">Apr 2017 - Apr 2019</span>
+          </div>
+          <p class="meta">Provo, UT</p>
+          <ul>
+            <li data-t="fullstack">Managed education.byu.edu, the McKay School of Education's Drupal site, with a small team: fixed problems for its users and built interactive learning modules for young children.</li>
+            <li data-t="fullstack backend">Worked in PHP, JavaScript, jQuery, AJAX, and Bootstrap on a MAMP stack, with Git and Linux.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Systems Engineer <span class="org">/ OAS Solar Research Group</span></h3>
+            <span class="dates">Oct 2015 - Aug 2017</span>
+          </div>
+          <p class="meta">Provo, UT</p>
+          <ul>
+            <li data-t="hardware">Founded and led an 11-student research team studying applied solar power, and secured $25k in grants to develop solar tracking devices.</li>
+            <li data-t="hardware">Wrote C libraries that recorded power output data from the team's solar panels.</li>
+            <li data-t="hardware">Prototyped an embedded data-logging device; drew its schematics and laid out its boards in KiCad, and had them made by the on-campus board shop.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Research Assistant <span class="org">/ BYU Electrical and Computer Engineering</span></h3>
+            <span class="dates">Nov 2015 - Feb 2016</span>
+          </div>
+          <p class="meta">Provo, UT</p>
+          <ul>
+            <li data-t="hardware backend">Programmed the interface for a remote GPS module using threaded socket programming in a client-server setup, and deployed radar equipment in the field.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Lab Assistant <span class="org">/ BYU Physics and Astronomy</span></h3>
+            <span class="dates">Apr 2015 - 2016</span>
+          </div>
+          <p class="meta">Provo, UT</p>
+          <ul>
+            <li data-t="hardware">Maintained and extended the ladder logic on an EZ Automation PLC that runs a vacuum e-beam deposition chamber making angstrom-thin films.</li>
+            <li data-t="hardware">Read and worked from the e-beam evaporator's schematics, and helped build a vacuum pump system for another lab.</li>
+          </ul>
+        </article>
+
       </div>
-      <p class="place">Provo, UT</p>
-      <ul>
-        <li>Joined the on-call rotation in the first year, covering off-hours incident response and production triage.</li>
-        <li>Rebuilt team testing practice; raised unit coverage on all team microservices from under 30% to 80%.</li>
-        <li>Maintained www-api services (GeoIP language routing across 13 locales, lead-funnel management) and the www-payments invoicing portal ($20k+ weekly transactions), ensuring PCI compliance with Stripe infrastructure.</li>
-        <li>Co-built the Certification Service (Node.js/Express REST API) powering the company LMS; processed 100+ exams weekly and provisioned ~30 sandbox accounts daily.</li>
-      </ul>
-    </div>
+    </section>
 
-    <div class="job">
-      <div class="job-head">
-        <p class="role">Engineering Intern <span class="org">/ Wavetronix</span></p>
-        <span class="dates">Apr 2018 - Apr 2019</span>
+    <section id="software">
+      <h2>Software projects</h2>
+      <div class="entries">
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3><a href="https://algo-catalog.com" rel="noopener">TheAlgoCatalog</a></h3>
+            <span class="dates">2026</span>
+          </div>
+          <p class="meta">Next.js, TypeScript, SQLite, Docker, GitHub Actions, Caddy, Cloudflare, Stripe</p>
+          <ul>
+            <li data-t="fullstack ai">Built and operate a catalog of 2,900+ backtested trading strategies with full source (224 in paid tiers) using agentic development in Claude Code; runs on DigitalOcean.</li>
+            <li data-t="fullstack platform">Ships through PR-gated GitHub Actions deploys with payments, analytics, email, monitoring and alerting, a daily forward-record job, and 39 published research articles.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Strategy research and trading system</h3>
+            <span class="dates">2026</span>
+          </div>
+          <p class="meta">Claude Code agents, RealTest, Python, Interactive Brokers TWS</p>
+          <ul>
+            <li data-t="ai backend">Designed the LLM agent pipeline that has researched, backtested, and graded 5,500+ strategies against 25+ years of point-in-time market data behind automated verification gates.</li>
+            <li data-t="ai backend">Its output feeds TheAlgoCatalog and a nightly automated chain that places and verifies trades in a live brokerage account, running unattended since September 2026.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Job application agent pipeline</h3>
+            <span class="dates">Sep - Oct 2026</span>
+          </div>
+          <p class="meta">Python, Node.js, Claude Code agents, browser agent, Trello</p>
+          <ul>
+            <li data-t="ai backend">Built a personal job-sourcing agent that polls about 490 ATS boards (Greenhouse, Lever, Ashby, Workday) and about 1,200 company careers pages twice daily, and filters postings by level, location, language, and domain into a Trello review queue.</li>
+            <li data-t="ai">Generates a tailored one-page resume per application from a fixed master bullet set, with exact-match verification after every build. I review and send every application by hand.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Stock trading tools</h3>
+            <span class="dates">2018 - 2019</span>
+          </div>
+          <p class="meta">Python, brokerage and market data APIs</p>
+          <ul>
+            <li data-t="ai backend">Wrote Python tools that pulled market data, ranked stocks with machine learning, probability, and signal-processing models, and placed trades through a brokerage API. TheAlgoCatalog grew out of this work.</li>
+          </ul>
+        </article>
+
       </div>
-      <p class="place">Provo, UT</p>
-      <ul>
-        <li>Led a team of 4 interns developing real-time traffic-radar algorithms on TI microcontrollers; was retained beyond internship at management's request to continue the project.</li>
-      </ul>
-    </div>
+    </section>
 
-    <div class="job">
-      <div class="job-head">
-        <p class="role">Web Developer <span class="org">/ Brigham Young University</span></p>
-        <span class="dates">Apr 2017 - Apr 2019</span>
+    <section id="hardware">
+      <h2>Hardware and shop <small>CAD: SketchUp 10 yrs, Fusion 2 yrs</small></h2>
+      <div class="entries">
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>DCC command station</h3>
+            <span class="dates">2025 - 2026</span>
+          </div>
+          <p class="meta">ESP32-S3, DRV8262, KiCad, C, GitHub Actions</p>
+          <ul>
+            <li data-t="hardware">Designed a model-railroad DCC command station end to end: ESP32-S3, DRV8262 dual H-bridge, current sensing on both outputs, KiCad schematics, and a 100-line BOM.</li>
+            <li data-t="hardware backend">Wrote the NMRA S-9.2 packet layer in portable C with 164 host tests and 49 golden vectors running in GitHub Actions.</li>
+            <li data-t="hardware">Bench bring-up fixed a reset runaway (a floating enable pin) and set a 300 mA ACK threshold from measured decoder current.</li>
+            <li data-t="hardware">Read the radio module's FCC modular grant, found it did not cover handheld use, and turned the KDB 447498 SAR exclusion into a design rule: 11 dBm max transmit power behind a 10 mm antenna keepout.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>4x8 CNC router</h3>
+            <span class="dates">2026</span>
+          </div>
+          <p class="meta">GRBL, NEMA 23 steppers, Fusion CAD/CAM, Python</p>
+          <ul>
+            <li data-t="hardware">Designing and building a full-sheet CNC router from scratch: wood frame, SBR20 rails, dual-motor belt-driven 8 ft axis at 3:1, and four NEMA 23 steppers and drivers on 36 V under GRBL. Wired the machine, controls, and limit switches myself.</li>
+            <li data-t="hardware">Wrote the drive analysis in Python (rotating screw vs. rotating nut vs. belt over 8 ft: thrust, deflection, step resolution, GRBL step-rate ceiling) and chose belt on the long axis and ball screw on the gantry.</li>
+            <li data-t="hardware">Traced router brush noise faulting the GRBL controller on my previous machine to unshielded high-impedance limit inputs on a floating frame, and wrote the filtering, shielding, and bonding plan for the new build.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Earlier CNC machines and 3D printers</h3>
+            <span class="dates">Before 2026</span>
+          </div>
+          <ul>
+            <li data-t="hardware">Built a 12x18 in CNC router on SBR16 rails (GRBL on an Arduino Uno) that I use for prototyping, wood parts, and tapering steel sprockets for my skid steer.</li>
+            <li data-t="hardware">Built a 2x4 ft CNC plasma table and cut bucket teeth for a mini excavator on it.</li>
+            <li data-t="hardware">Built an Anet A8 3D printer from a kit, run an Ender 3, and set up OctoPi on both.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Skid steer</h3>
+            <span class="dates">2022</span>
+          </div>
+          <p class="meta">SketchUp, MIG welding, hydraulics, Arduino. Lifts about 650 lb; 5 ft 9 in hinge pin height.</p>
+          <ul>
+            <li data-t="hardware">Designed a skid steer in SketchUp and built it: a mild steel frame I MIG welded, an 18 hp Vanguard engine, and a hydraulic system I plumbed myself with hydraulic drive on both sides.</li>
+            <li data-t="hardware">Wired every harness and circuit from scratch, with Arduino controls I built for ignition, lighting, and brakes. I used it to re-landscape my whole yard.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Instrument panel and electrical rebuild, 1993 GMC Sierra K3500</h3>
+            <span class="dates">2024</span>
+          </div>
+          <ul>
+            <li data-t="hardware">Stripped the dashboard and every electrical interface behind it and rebuilt them as one system: ignition, A/C and heat, lighting, gauges, and new wiring harnesses throughout.</li>
+            <li data-t="hardware">Designed the replacement dash panels, displays, and instrument panels in CAD and cut them from plastic on my CNC, layered over printed vellum with backlighting for night driving.</li>
+            <li data-t="hardware">Built a trailer brake controller with a position sensor and power amplification outputs.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3><a href="https://www.chevybolt.org/threads/the-tale-of-the-3-bolts-and-1-2-a-brain-how-i-got-my-bolt.61337/" rel="noopener">Chevy Bolt rebuild</a></h3>
+            <span class="dates">Dec 2025 - Jan 2026</span>
+          </div>
+          <p class="meta">Build thread on the Chevy Bolt EV Forum</p>
+          <ul>
+            <li data-t="hardware">Bought three salvage Chevy Bolt EVs at auction (two 2017 LTs and a 2018 Premier) and handled diagnosis, teardown, and repair end to end.</li>
+            <li data-t="hardware">Rebuilt the rear-ended 2018 Premier with the rear hatch and bumper from a front-damaged donor, which took extensive cutting and welding, and passed Utah's safety inspection for a rebuilt title.</li>
+            <li data-t="hardware">Sold the running 2017 LT I had bought as a backup for $500 more than I paid, stripped the donor for spare parts, and scrapped its shell.</li>
+          </ul>
+        </article>
+
       </div>
-      <p class="place">Provo, UT</p>
-      <ul>
-        <li>Supported and maintained the Drupal site for the McKay School of Education, building interactive learning modules.</li>
-      </ul>
-    </div>
+    </section>
 
-    <div class="job">
-      <div class="job-head">
-        <p class="role">Systems Engineer <span class="org">/ OAS Solar Research Group</span></p>
-        <span class="dates">Jan 2015 - Dec 2017</span>
+    <section id="ventures">
+      <h2>Businesses</h2>
+      <div class="entries">
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>TinyHomeBuilders <span class="org">/ Founder</span></h3>
+            <span class="dates">2020 - 2022</span>
+          </div>
+          <ul>
+            <li data-t="hardware">Built three tiny homes on wheels by myself, including welding and modifying the trailers, and sold them at about 2x build cost. Handled construction, legal requirements, and marketing.</li>
+            <li data-t="hardware">Applied Paul Akers' 2 Second Lean in the shop: reorganized it, set up a miter saw line for repeat cut lengths, and built a backstop with a recessed tape and screw-in stop block for fast changeover.</li>
+          </ul>
+        </article>
+
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Refuelify <span class="org">/ Founder</span></h3>
+            <span class="dates">2019</span>
+          </div>
+          <p class="meta">Node.js, NGINX, MongoDB, Ubuntu on DigitalOcean</p>
+          <ul>
+            <li data-t="fullstack backend">Designed and built the full front end, back end, and REST API for an on-demand gasoline delivery business, including a PCI-compliant payment gateway integration. State regulations blocked operations before the first sale.</li>
+            <li data-t="platform backend">Ran the server myself: SSL, firewalls, database security, continuous integration, and deployment.</li>
+          </ul>
+        </article>
+
       </div>
-      <p class="place">Provo, UT</p>
-      <ul>
-        <li>Led an 11-student research team studying applied solar power; secured $25k in grants for solar panel prototyping.</li>
-      </ul>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <h2>Projects</h2>
-
-    <div class="job">
-      <div class="job-head">
-        <p class="role">TheAlgoCatalog</p>
-        <span class="dates">2026</span>
+    <section id="education">
+      <h2>Education</h2>
+      <div class="entries">
+        <article class="entry">
+          <div class="entry-head">
+            <h3>Brigham Young University <span class="org">/ Provo, UT</span></h3>
+            <span class="dates">Apr 2019</span>
+          </div>
+          <p class="meta">BS Computer Engineering, minor in Computer Science. GPA 3.53.</p>
+          <p class="scope">Coursework: Real-Time Operating Systems, Embedded Programming, Digital System Design, Computer Systems, Data Structures, Advanced Programming Concepts, Web Programming, Tools for Machine Learning, Signals and Systems, Capstone Design.</p>
+          <ul>
+            <li data-t="hardware backend">Wrote a real-time operating system kernel from scratch: a prioritized preemptive scheduler with prioritized interrupts, message queues, semaphores, and events.</li>
+            <li data-t="backend fullstack">Built a family history Android app (Java, Android SDK) that maps individuals and their relatives across generations on Google Maps, backed by a Java REST API server and SQLite. Tested it on a Kindle Fire 8.</li>
+            <li data-t="hardware">Owned parts of the BYU Supermileage Team's competition vehicle, Sep 2018 - Apr 2019. The team targeted 2,500 mpg and the car reached about 2,100 mpg.</li>
+          </ul>
+        </article>
       </div>
-      <ul>
-        <li>Built a subscription algorithmic-trading strategy catalog using agentic development (Claude Code); deployed on DigitalOcean behind Caddy and Cloudflare.</li>
-        <li>Designed an LLM agent pipeline that researches, backtests, verifies, and stages trading strategies.</li>
-        <li>Ships via PR-gated deploys (GitHub Actions); includes analytics, email delivery, and a payment portal. Added monitoring, alerting, and metrics for observability. Live at <a href="https://algo-catalog.com" rel="noopener">algo-catalog.com</a>.</li>
-      </ul>
-    </div>
+    </section>
 
-    <div class="job">
-      <div class="job-head">
-        <p class="role">TinyHomeBuilders <span class="org">/ Founder</span></p>
-        <span class="dates">2020 - 2022</span>
-      </div>
-      <ul>
-        <li>Built three tiny homes on wheels; sold each for 2x build cost.</li>
-        <li>Navigated novel construction methods, legal requirements, and marketing tactics.</li>
-      </ul>
-    </div>
-  </section>
+    <section id="skills">
+      <h2>Skills</h2>
+      <dl class="skills">
+        <dt data-t="fullstack backend ai platform hardware">Languages</dt>
+        <dd data-t="fullstack backend ai platform hardware">TypeScript, JavaScript, Python, SQL, PHP, Java, C, C++</dd>
+        <dt data-t="fullstack">Front end</dt>
+        <dd data-t="fullstack">React, Next.js, Vue, Tailwind, Drupal (Twig), WordPress</dd>
+        <dt data-t="backend fullstack">Back end and data</dt>
+        <dd data-t="backend fullstack">Node.js, Express, NestJS, FastAPI, REST API design, OAuth 2.0, Stripe, PostgreSQL, MySQL, SQLite, Redis, MongoDB</dd>
+        <dt data-t="backend">Integrations</dt>
+        <dd data-t="backend">Salesforce, Skilljar, ProctorU, Mailchimp/Mandrill, Stripe</dd>
+        <dt data-t="ai">AI engineering</dt>
+        <dd data-t="ai">MCP server design and auth (Descope, Google OIDC), Anthropic API, Claude Code, Cursor, Galileo tool-call tracing, agent pipelines with verification gates</dd>
+        <dt data-t="platform backend">Delivery</dt>
+        <dd data-t="platform backend">Docker, Kubernetes (Helm), AWS (EKS, EC2, S3, RDS), GitLab CI, GitHub Actions, Jenkins, NGINX, Cloudflare</dd>
+        <dt data-t="platform backend fullstack">Reliability and testing</dt>
+        <dd data-t="platform backend fullstack">New Relic (NRQL, Synthetic Monitors), Splunk, Grafana, Prometheus, OpenTelemetry, on-call and incident response, vulnerability remediation, Vitest, Playwright, PHPUnit</dd>
+        <dt data-t="hardware">Hardware</dt>
+        <dd data-t="hardware">Arduino, ESP32, TI microcontrollers, RTOS, KiCad, LTspice, FPGA (Verilog, VHDL), PLC ladder logic (EZ Automation), GRBL, Universal Gcode Sender</dd>
+        <dt data-t="hardware">Design and fabrication</dt>
+        <dd data-t="hardware">SketchUp (10 years), Autodesk Fusion (2 years), welding, woodworking, 2 Second Lean</dd>
+        <dt data-t="fullstack backend ai platform hardware">Spoken languages</dt>
+        <dd data-t="fullstack backend ai platform hardware">English, Spanish (fluent)</dd>
+      </dl>
+    </section>
 
-  <section>
-    <h2>Education</h2>
-    <div class="job">
-      <div class="edu-line">
-        <p class="role">Brigham Young University <span class="org">/ Provo, UT</span></p>
-        <span class="dates">Apr 2019</span>
-      </div>
-      <p class="place">Bachelor of Science in Computer Engineering, Minor in Computer Science</p>
-    </div>
-  </section>
-
-  <section>
-    <h2>Technical Skills</h2>
-    <dl class="skills">
-      <dt>Platforms</dt>
-      <dd>AWS (EKS, EC2, S3, RDS), Kubernetes, Docker, GitLab CI, GitHub Actions, Jenkins, Spinnaker, Nomad, Rundeck, NGINX, Cloudflare, DNS, load balancing</dd>
-
-      <dt>Practices</dt>
-      <dd>CI/CD, incident response and on-call, monitoring and alerting, vulnerability remediation, code review, unit and end-to-end testing</dd>
-
-      <dt>Observability and testing</dt>
-      <dd>New Relic (NRQL, Synthetic Monitors), Prometheus, OpenTelemetry, Grafana, Splunk, Splunk On-Call (VictorOps), Playwright, Vitest, PHPUnit</dd>
-
-      <dt>Languages</dt>
-      <dd>Python, JavaScript, TypeScript, SQL, PHP, C++</dd>
-
-      <dt>Frameworks and data</dt>
-      <dd>Node.js, Express, NestJS, PostgreSQL, Redis, MongoDB, React/Next.js, Vue, Drupal, WordPress</dd>
-
-      <dt>AI engineering</dt>
-      <dd>MCP server design and OAuth authentication (Descope), Anthropic API, LangChain, GalileoAI, Claude Code, prompt and context engineering, LLM agent harness design, verification-driven agentic workflows</dd>
-    </dl>
-  </section>
-
-  <footer>
-    Contact details available on request. Print this page for a PDF copy.
-  </footer>
-
+    <footer>Please reach out through <a href="https://linkedin.com/in/christopher-running" rel="noopener">LinkedIn</a>. Updated October 2026.</footer>
+  </main>
 </div>
+
+<script>
+(function () {
+  var chips = Array.prototype.slice.call(document.querySelectorAll(".chip"));
+  var lines = Array.prototype.slice.call(document.querySelectorAll(".entry li[data-t]"));
+  var entries = Array.prototype.slice.call(document.querySelectorAll(".entry"));
+  var skillCells = Array.prototype.slice.call(document.querySelectorAll(".skills [data-t]"));
+  var count = document.getElementById("lens-count");
+  var names = { all: "", fullstack: "full stack", backend: "backend", ai: "AI", platform: "platform", hardware: "hardware" };
+
+  function has(el, lens) { return (el.getAttribute("data-t") || "").split(" ").indexOf(lens) !== -1; }
+
+  function apply(lens) {
+    if (!names.hasOwnProperty(lens)) lens = "all";
+    var all = lens === "all", hits = 0;
+    chips.forEach(function (c) { c.setAttribute("aria-pressed", String(c.getAttribute("data-lens") === lens)); });
+    lines.forEach(function (li) {
+      var on = all || has(li, lens);
+      if (on && !all) hits++;
+      li.classList.toggle("dim", !on);
+      li.classList.toggle("hit", on && !all);
+    });
+    entries.forEach(function (en) {
+      var items = en.querySelectorAll("li[data-t]");
+      if (!items.length) { en.classList.toggle("dim", !all); return; }
+      var any = all;
+      for (var i = 0; i < items.length && !any; i++) any = has(items[i], lens);
+      en.classList.toggle("dim", !any);
+      if (!any) for (var j = 0; j < items.length; j++) items[j].classList.remove("dim");
+    });
+    skillCells.forEach(function (s) { s.classList.toggle("dim", !(all || has(s, lens))); });
+    count.textContent = all
+      ? lines.length + " lines of work on this page"
+      : hits + " of " + lines.length + " lines apply to " + names[lens] + " roles";
+    try { localStorage.setItem("lens", lens); } catch (e) {}
+  }
+
+  chips.forEach(function (c) {
+    c.addEventListener("click", function () {
+      var lens = c.getAttribute("data-lens");
+      apply(lens);
+      try { history.replaceState(null, "", lens === "all" ? location.pathname : "#" + lens); } catch (e) {}
+    });
+  });
+
+  var start = (location.hash || "").replace("#", "");
+  if (!names.hasOwnProperty(start)) {
+    start = "all";
+    try { start = localStorage.getItem("lens") || "all"; } catch (e) {}
+  }
+  apply(start);
+})();
+</script>
 </body>
 </html>
