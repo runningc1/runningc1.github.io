@@ -57,6 +57,23 @@ h1 {
 .intro { margin: 24px 0 0; font-size: 1.05rem; }
 .note { margin: 12px 0 0; color: var(--muted); font-size: 0.92rem; }
 
+.story { margin: 32px 0 0; padding: 20px 22px 6px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 8px; }
+.story > h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
+  margin: 0 0 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+.story > h2 small { font: 400 0.76rem var(--font-mono); color: var(--muted); }
+.story p { margin: 12px 0 0; }
+.story p.how { margin: 18px 0 14px; padding-top: 12px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.88rem; }
+
 .legend { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 24px 0 0; padding: 0; list-style: none; font-size: 0.85rem; color: var(--muted); }
 .legend li { display: flex; align-items: center; gap: 6px; }
 
@@ -121,6 +138,17 @@ footer { margin-top: 64px; padding-top: 14px; border-top: 1px solid var(--rule);
 
   <p class="intro">Sprout makes children's furniture and runs its shop floor and orders on an in-house Django ERP. I joined as the main developer on that ERP the week the previous lead developer left, and I split my time between the ERP and production work on a new CNC machine. This page is a dated record of what I built and shipped, newest first.</p>
   <p class="note">I do this work with Claude agents under rules I set: production is read-only for the agent unless I approve a specific step, and every change ships with a written rollback and a full-system check afterward. Customer data and internal system details are left off this page.</p>
+
+  <section class="story" aria-labelledby="first-week">
+    <h2 id="first-week">My first week, counted in hours <small>as of 2026-10-17</small></h2>
+    <p>Most of the hours on this card have not been saved yet. They come from a cost model I built out of the ERP's own request logs and machine timings, and only one of the fixes behind them is live today. I still wanted to write the numbers down, because they are how I decide what to work on next.</p>
+    <p>The week took about 55 hours: 34 on the time clock and about 20 more at home. Working with Claude agents, I rebuilt staging as a copy of production, put monitoring on both production servers, got the test suite running again and added about 1,500 tests, filed about 100 bug tickets from a page-by-page pass through the ERP and the design tool, and shipped a handful of fixes and small features to production.</p>
+    <p>The model counts four kinds of waiting: operators at the CNC stations waiting for a page to open, office staff waiting on slow report pages, everyone waiting through mid-day deploys that briefly took the site down, and machines pausing longer than they need to inside CNC programs. If every fix in the plan lands, that is about 870 person-hours a year, about 3.5 hours every workday. Today, with only the deploy change live (deploys now reload without dropping anyone and happen after hours), it is about 145.</p>
+    <p>Per hour I worked, that is about 2.7 hours a year saved now. It goes to about 7.5 once the CNC station fix ships, and about 6 for the whole plan after I add the roughly 90 hours of build work it still needs.</p>
+    <p>The other number I wanted was my own time. Item by item, I estimate the same week would have taken me 200 to 370 hours without Claude, which is five to nine weeks of full-time work. That leaves out the 1,500 tests, which I would not have written by hand at all. It is an estimate, not a measurement.</p>
+    <p>The fix I most want to see live is the CNC station one. The operators there lose over an hour a day, combined, waiting for a screen, and that is time they could spend running the machines.</p>
+    <p class="how">How I counted: hours worked are my time-clock punches for October 13 to 16 plus my own count of hours at home. Savings use 250 workdays a year and the model's before-and-after waits; the office and kitting figures assume cuts of 50% and 73% that are not yet targets, and the deploy-outage inputs are estimates until the uptime alerts give real minutes. A CNC program fix that another developer shipped this week is left out.</p>
+  </section>
 
   <ul class="legend" aria-label="Status labels">
     <li><span class="tag live">Live</span> running in production</li>
