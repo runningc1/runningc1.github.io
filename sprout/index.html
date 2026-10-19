@@ -162,6 +162,19 @@ footer { margin-top: 64px; padding-top: 14px; border-top: 1px solid var(--rule);
     When something ships, change its tag and add a line with the ship date.
   -->
 
+  <section class="day" aria-labelledby="d-2026-10-19">
+    <h2 id="d-2026-10-19">Monday, October 19, 2026 <small>2026-10-19</small></h2>
+
+    <article class="item">
+      <h3>Cut each CI run from about 230 seconds to about 62 <span class="tag live">Live</span></h3>
+      <p>The test suite now runs in 12 worker processes instead of one. Measuring first showed that one smoke test, which loads all 860 admin pages in a single method, took 157 of the suite's 213 seconds, and a single method cannot be spread across workers. I split it into 12 test classes that each load every 12th page; the totals match the old test exactly.</p>
+      <ul>
+        <li>Running in parallel exposed two hidden dependencies between tests, and I fixed both at the source. A cache shared by every test process let one worker read objects that another worker had cached from a different test database; each process now has its own cache. The smoke tests also left their last request stored as the "current request", and a later test picked up a deleted employee from it; that stored request is now cleared after each test.</li>
+        <li>Checked with repeated parallel runs and with one-process runs, using both cache setups, before merging. After the merge, master runs 1,662 tests in 62 seconds, all passing.</li>
+      </ul>
+    </article>
+  </section>
+
   <section class="day" aria-labelledby="d-2026-10-17">
     <h2 id="d-2026-10-17">Saturday, October 17, 2026 <small>2026-10-17</small></h2>
 
