@@ -136,15 +136,13 @@ footer { margin-top: 64px; padding-top: 14px; border-top: 1px solid var(--rule);
   <h1>Sprout work log</h1>
   <p class="sub">Software Engineer at Sprout, Utah. October 2026 - present.</p>
 
-  <p class="intro">Sprout makes children's furniture and runs its shop floor and orders on an in-house Django ERP. I joined as the main developer on that ERP the week the previous lead developer left, and I split my time between the ERP and production work on a new CNC machine. This page is a dated record of what I built and shipped, newest first.</p>
-  <p class="note">I do this work with Claude agents under rules I set: production is read-only for the agent unless I approve a specific step, and every change ships with a written rollback and a full-system check afterward. Customer data and internal system details are left off this page.</p>
+  <p class="intro">Sprout makes children's furniture and runs its shop floor and orders on an in-house ERP. I am the main developer on that ERP, and I split my time between the ERP and production work on a new CNC machine. This page is a dated record of what I built and shipped, newest first.</p>
+  <p class="note">I do this work with Claude agents under rules I set: production is read-only for the agent unless I approve a specific step, and every change ships with a written rollback and a check afterward. Customer data, internal system details and company figures are left off this page.</p>
 
   <section class="story" aria-labelledby="first-week">
     <h2 id="first-week">My first week, counted in hours <small>as of 2026-10-17</small></h2>
-    <p>Most of these hours are not saved yet. They come from a cost model I built from the ERP's request logs and machine timings, and only one fix behind them is live.</p>
-    <p>The week took me about 55 hours (34 on the clock, about 20 at home). If every fix in the plan lands, it saves about 870 person-hours a year, mostly people waiting on slow pages and on outages. Per hour I worked, that is about 2.7 hours a year saved today, 7.5 once the CNC station fix ships, and about 6 for the whole plan once I count the build work left.</p>
-    <p>I did the week with Claude agents. Without them I estimate the same work would have taken me 200 to 370 hours, or five to nine weeks full time.</p>
-    <p class="how">Hours worked are time-clock punches plus my own count of hours at home. Savings assume 250 workdays a year, and some of the reductions are assumptions, not measurements.</p>
+    <p>The week took me about 55 hours. Most of the time savings behind it are still estimates from a cost model, because only some of the fixes are live so far. If the whole plan lands, it gives back a large amount of staff time, mostly time people spend waiting on slow pages.</p>
+    <p>I did the week with Claude agents. Without them I estimate the same work would have taken me five to nine weeks full time.</p>
   </section>
 
   <ul class="legend" aria-label="Status labels">
@@ -160,17 +158,21 @@ footer { margin-top: 64px; padding-top: 14px; border-top: 1px solid var(--rule);
     Status tags: <span class="tag live">Live</span>, <span class="tag review">In review</span>,
     <span class="tag">Built</span>, <span class="tag">Analysis</span>.
     When something ships, change its tag and add a line with the ship date.
+    Keep every entry general (Chris, 2026-10-19): describe what was done and the kind of
+    result. No company secrets: no internal numbers or metrics, table, job, server or
+    worker counts, system or vendor names, URLs, security gaps or past failures,
+    business or pricing data, customer data, or people's names and departures.
   -->
 
   <section class="day" aria-labelledby="d-2026-10-19">
     <h2 id="d-2026-10-19">Monday, October 19, 2026 <small>2026-10-19</small></h2>
 
     <article class="item">
-      <h3>Cut each CI run from about 230 seconds to about 62 <span class="tag live">Live</span></h3>
-      <p>The test suite now runs in 12 worker processes instead of one. Measuring first showed that one smoke test, which loads all 860 admin pages in a single method, took 157 of the suite's 213 seconds, and a single method cannot be spread across workers. I split it into 12 test classes that each load every 12th page; the totals match the old test exactly.</p>
+      <h3>Cut automated test runs to about a quarter of their time <span class="tag live">Live</span></h3>
+      <p>The test suite now runs in parallel worker processes instead of one. Measuring first showed that one large smoke test took most of the run on its own, and a single test cannot be spread across workers, so I split it into smaller test classes that cover the same pages.</p>
       <ul>
-        <li>Running in parallel exposed two hidden dependencies between tests, and I fixed both at the source. A cache shared by every test process let one worker read objects that another worker had cached from a different test database; each process now has its own cache. The smoke tests also left their last request stored as the "current request", and a later test picked up a deleted employee from it; that stored request is now cleared after each test.</li>
-        <li>Checked with repeated parallel runs and with one-process runs, using both cache setups, before merging. After the merge, master runs 1,662 tests in 62 seconds, all passing.</li>
+        <li>Running in parallel exposed two hidden dependencies between tests: a cache shared across test processes, and state left over from an earlier test. I fixed both at the source instead of working around them.</li>
+        <li>Checked with repeated parallel and single-process runs before merging; every test passes.</li>
       </ul>
     </article>
   </section>
@@ -179,12 +181,8 @@ footer { margin-top: 64px; padding-top: 14px; border-top: 1px solid var(--rule);
     <h2 id="d-2026-10-17">Saturday, October 17, 2026 <small>2026-10-17</small></h2>
 
     <article class="item">
-      <h3>Committed and available quantities on the inventory value report <span class="tag live">Live</span></h3>
-      <p>Closed an open request on the report's ticket: the inventory value report can now show each item's current committed and available quantities. They load on demand from a link above the table, because looking them up per item adds time on large filters.</p>
-      <ul>
-        <li>Fixed a header bug on the same report: the value total sat one column right of the Value column whenever the standard hours column was hidden.</li>
-        <li>Checked the change on 13 filter combinations before and after saving. Row data and totals were identical; only the header changed.</li>
-      </ul>
+      <h3>Committed and available quantities on an inventory report <span class="tag live">Live</span></h3>
+      <p>Closed an open request: the inventory value report can now show each item's committed and available quantities, loaded on demand so large reports stay fast. Also fixed a header that sat one column off in one view. Row data and totals were checked before and after the change and matched.</p>
     </article>
   </section>
 
@@ -192,58 +190,48 @@ footer { margin-top: 64px; padding-top: 14px; border-top: 1px solid var(--rule);
     <h2 id="d-2026-10-16">Friday, October 16, 2026 <small>2026-10-16</small></h2>
 
     <article class="item">
-      <h3>Found why the CNC station pages are slow <span class="tag">Analysis</span></h3>
-      <p>Opening a sheet's work entry at a CNC station took 13 to 22 seconds at the median on three of the machines, against about 1.2 seconds at the kitting stations.</p>
-      <ul>
-        <li>Showed from 14 days of request logs that server capacity is not the cause: on average 1.0 to 1.6 of 8 app workers were busy in work hours, and the slow pages are just as slow in quiet hours.</li>
-        <li>Profiled one page open: 6,946 SQL queries, 5,478 of them fetching the same kind of row one at a time (an N+1 query pattern in the serializer).</li>
-        <li>Measured the cost: about 78 minutes of operator waiting per workday across the CNC stations.</li>
-        <li>Wrote the fix plan: golden-response tests and query-budget tests first, then the query fixes, then a staging check and a before-and-after measurement on the floor.</li>
-      </ul>
+      <h3>Found why some shop-floor station pages are slow <span class="tag">Analysis</span></h3>
+      <p>Some station pages took much longer to open than others. Request logs showed server capacity was not the cause; profiling one page open found an N+1 query pattern. I estimated the operator waiting time it costs and wrote a fix plan: tests that pin the current output and query counts first, then the query fixes, then a staging check and a before-and-after measurement on the floor.</p>
     </article>
 
     <article class="item">
-      <h3>Fixed a nightly inventory sync that had failed silently for five months <span class="tag review">In review</span></h3>
-      <p>The nightly job that pushes stock levels from the ERP to the online store had not completed since May. A notification call added in May passed the wrong object, raised an error, and the job's own error handler then crashed, so nothing was reported.</p>
-      <ul>
-        <li>Fix records the real error with its traceback and makes the job exit non-zero on failure, so the new job monitor catches it. 5 tests.</li>
-        <li>Held for a business decision: the first good run overwrites any stock counts that were corrected by hand in the store since May.</li>
-      </ul>
+      <h3>Fixed a nightly sync job that was failing without reporting it <span class="tag review">In review</span></h3>
+      <p>A nightly job that keeps stock levels in step with the online store had stopped completing, and its error handling hid the failure. The fix records the real error and makes the job fail visibly so monitoring catches it, with tests. Its first run waits on a business decision.</p>
     </article>
 
     <article class="item">
       <h3>Made the test suite pass again <span class="tag review">In review</span></h3>
-      <p>The ERP's test suite stopped before running any test. I made it runnable, then fixed the 14 tests that were failing because they had fallen behind code changes. Result: 74 tests run, all pass, 2 skipped with written reasons. Test-only changes; no application code touched.</p>
+      <p>The ERP's test suite would not run. I made it runnable and fixed the tests that had fallen behind code changes, so the whole suite passes. Test-only changes; no application code touched.</p>
     </article>
 
     <article class="item">
-      <h3>Continuous integration without admin rights <span class="tag live">Live</span></h3>
-      <p>Built Docker CI images that match production's Python and Postgres versions. While Bitbucket admin access is pending, my work laptop polls the repository every 5 minutes, runs the suite against each new branch tip, and posts results to Slack.</p>
+      <h3>Continuous integration for the ERP <span class="tag live">Live</span></h3>
+      <p>Set up automated test runs that match production's Python and database versions, test every new branch, and post results to the team chat.</p>
     </article>
 
     <article class="item">
-      <h3>Page checks for the 60 busiest pages <span class="tag">Built</span></h3>
-      <p>20 of the busiest pages are reports stored in the database, so they cannot be tested against an empty test database. I wrote a checker that runs on staging against a scrubbed copy of production, loads each page as an admin and as an anonymous user, and rolls back every request so pages that write on GET leave nothing behind. First run: 40 of 54 pages passed; the rest are listed for follow-up.</p>
+      <h3>Page checks for the busiest pages <span class="tag">Built</span></h3>
+      <p>Many of the busiest pages are reports defined in the database, so an empty test database cannot test them. I wrote a checker that runs on staging against a scrubbed copy of production and rolls back every request, and listed the pages that need follow-up.</p>
     </article>
 
     <article class="item">
-      <h3>WebSocket tests for the live station pages <span class="tag">Built</span></h3>
-      <p>15 tests for the real-time station screens. 5 of them are marked as expected failures and document real bugs, including updates that are lost when they are queued outside a web request.</p>
+      <h3>Tests for the live station pages <span class="tag">Built</span></h3>
+      <p>Tests for the real-time station screens, including expected-failure tests that document known bugs until they are fixed.</p>
     </article>
 
     <article class="item">
       <h3>Database usage audit <span class="tag">Analysis</span></h3>
-      <p>Counted reads and writes on all 572 tables in the ERP database: 123 tables show no use in their lifetime counters. 17 Django apps form one foreign-key cycle, which rules out splitting the ERP into services for now.</p>
+      <p>Measured which parts of the ERP's database are in use, to guide cleanup, and mapped how its modules depend on each other.</p>
     </article>
 
     <article class="item">
-      <h3>Pricing model data page <span class="tag">Built</span></h3>
-      <p>A page for the CEO's pricing model that exports teams, machines, production groups and products from the ERP as JSON, with a new manufacturing type model (plywood or solid wood). 7 tests. Fields the ERP does not have yet are marked so they can be filled in.</p>
+      <h3>Data export page for a pricing model <span class="tag">Built</span></h3>
+      <p>A page that exports the ERP data a pricing model needs, with one new product attribute and tests. Fields the ERP does not have yet are marked so they can be filled in.</p>
     </article>
 
     <article class="item">
       <h3>Bug tickets from the first day of error alerts <span class="tag live">Live</span></h3>
-      <p>Filed 4 bug tickets from the first day of error alerts, including a race condition on a sequence number, and cut duplicate Slack posts so one error produces one alert.</p>
+      <p>Filed bug tickets from the first day of the new error alerts and removed duplicate alerts, so one error produces one alert.</p>
     </article>
   </section>
 
@@ -252,37 +240,29 @@ footer { margin-top: 64px; padding-top: 14px; border-top: 1px solid var(--rule);
 
     <article class="item">
       <h3>Read-only inventory of the production servers <span class="tag">Analysis</span></h3>
-      <p>Documented the services, scheduled jobs, backups and database on each production server, and got the departing lead developer's answers on everything the servers could not tell me. It found 6 scheduled jobs that fail on every run because the command they call does not exist, with the errors going nowhere.</p>
+      <p>Documented the services, scheduled jobs, backups and database on the production servers, which turned up scheduled jobs that needed fixing.</p>
     </article>
 
     <article class="item">
       <h3>Monitoring and alerting for the ERP, at no added cost <span class="tag live">Live</span></h3>
-      <p>Before this, nobody was alerted when a page threw an error or a scheduled job failed, and nothing checked whether the site was up. Built in-house on the hosting provider's free tools and a Slack app, with no third-party monitoring service:</p>
-      <ul>
-        <li>Memory and load alerts on both production servers, routed to Slack and email.</li>
-        <li>An uptime check on a heartbeat page that goes stale if the server or its scheduler stops, plus TLS certificate expiry warnings.</li>
-        <li>An error digest that reads the ERP's existing request log, groups new exceptions, and posts each new group once.</li>
-        <li>A wrapper on all 23 scheduled jobs that records exit codes and alerts when a run fails or does not finish on time.</li>
-        <li>A metrics sampler that keeps server history beyond the provider's 14 days.</li>
-      </ul>
-      <p>The installer and its rollback were tested in a container built from production's configuration (the rollback restores every file byte for byte), then installed on both production servers after midnight on the 16th with a full-system check before and after.</p>
+      <p>Error, uptime, scheduled-job and server-health alerts, built on the hosting provider's free tools and an in-house chat integration with no third-party monitoring service. The installer and its rollback were tested on a copy of the production configuration first, then installed outside work hours with a full check before and after.</p>
     </article>
 
     <article class="item">
       <h3>Rebuilt staging to match production <span class="tag live">Live</span></h3>
-      <p>The old staging server had not been used since 2023. I rebuilt it so code can be verified on a copy of production before it ships:</p>
+      <p>Rebuilt the staging server so changes can be checked on a copy of production before they ship:</p>
       <ul>
-        <li>Same OS release and package versions as production (966 packages identical), and an identical Python environment (205 packages).</li>
-        <li>Restored from production's nightly backup, which also proved the backup restores.</li>
-        <li>Personal data scrubbed on every restore, with a check that stops the app if any real email or phone number remains.</li>
-        <li>Outbound connections from the app blocked at the firewall, so staging cannot email customers or call vendor APIs.</li>
-        <li>A red STAGING bar on every page with a link to the real site.</li>
+        <li>Same OS release and package versions as production.</li>
+        <li>Restored from a production backup, which also proved the backups restore.</li>
+        <li>Personal data scrubbed on every restore, with a check that stops the app if any remains.</li>
+        <li>Outbound connections blocked, so staging cannot contact customers or vendors.</li>
+        <li>A STAGING bar on every page.</li>
       </ul>
     </article>
 
     <article class="item">
       <h3>Template responses for the design tool's questionnaires <span class="tag live">Live</span></h3>
-      <p>Staff can now pre-fill part of a questionnaire and send one link; each visit creates a new response with the pre-filled answers locked. Migration, views, locking for every question type, and 22 tests (the app had none). This was the first pull request in that repository.</p>
+      <p>Staff can now pre-fill part of a questionnaire and send one link; each visit creates a new response with the pre-filled answers locked. Migration, views, locking for every question type, and tests.</p>
     </article>
 
     <article class="item">
@@ -301,11 +281,11 @@ footer { margin-top: 64px; padding-top: 14px; border-top: 1px solid var(--rule);
 
     <article class="item">
       <h3>Took over the ERP and wrote the plan for it <span class="tag">Analysis</span></h3>
-      <p>The previous lead developer's last day was two days later. With the CEO's go-ahead I wrote the ERP master plan: observability first, then tests, CI and staging, automated deploys with rollback, a usage audit, removal of unused code, platform upgrades, secrets and access, and finally sizing the servers to what the system uses. Rule for every phase: nothing may take the database or the site down, and feature work continues the whole time.</p>
+      <p>I wrote a plan for the ERP: observability first, then tests, CI and staging, automated deploys with rollback, a usage audit, removal of unused code, platform upgrades, access management, and sizing the servers to what the system uses. Rule for every phase: nothing may take the site down, and feature work continues the whole time.</p>
     </article>
   </section>
 
-  <footer>Last updated 2026-10-17.</footer>
+  <footer>Last updated 2026-10-19.</footer>
 </div>
 </body>
 </html>

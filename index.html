@@ -219,11 +219,11 @@ footer { margin-top: 64px; padding-top: 14px; border-top: 1px solid var(--rule);
           <p class="meta">Utah. Children's furniture maker. <a href="sprout/">Dated work log</a></p>
           <p class="scope">Main developer on Sprout's in-house Django ERP, which runs the shop floor and orders, with the rest of my time on production work for a new CNC machine.</p>
           <ul>
-            <li data-t="platform backend">Took over the ERP the week the previous lead developer left: inventoried the production servers read-only and wrote a phased plan (observability, tests and CI, automated deploys, cleanup, upgrades) that keeps the site up the whole time.</li>
-            <li data-t="platform backend">Built monitoring and alerting with no third-party service: uptime and certificate checks, an error digest from the ERP's own request log, and failure alerts on all 23 scheduled jobs, all posting to Slack. Tested install and rollback in a container before installing on production.</li>
-            <li data-t="platform backend">Rebuilt an unused staging server to match production package for package, restored from the nightly backup with personal data scrubbed and outbound connections blocked.</li>
-            <li data-t="backend">Traced a nightly inventory sync to the online store that had failed silently for five months, and made the ERP's test suite run and pass again (74 tests).</li>
-            <li data-t="backend fullstack">Found that the slowest shop-floor pages ran 6,946 SQL queries per page open (an N+1 pattern), not a capacity problem; fix plan in progress.</li>
+            <li data-t="platform backend">Took over the ERP: inventoried the production servers read-only and wrote a phased plan (observability, tests and CI, automated deploys, cleanup, upgrades) that keeps the site up the whole time.</li>
+            <li data-t="platform backend">Built monitoring and alerting with no third-party service: uptime and certificate checks, an error digest from the ERP's own request log, and failure alerts on scheduled jobs. Tested install and rollback before installing on production.</li>
+            <li data-t="platform backend">Rebuilt the staging server to match production, restored from a production backup with personal data scrubbed and outbound connections blocked.</li>
+            <li data-t="backend">Fixed a nightly sync job whose failures were going unreported, made the ERP's test suite run and pass again, and cut automated test runs to about a quarter of their time.</li>
+            <li data-t="backend fullstack">Traced the slowest shop-floor pages to an N+1 query pattern rather than server capacity; fix plan in progress.</li>
             <li data-t="ai platform">Run this work with Claude agents under rules I set: read-only production access unless I approve a step, and a written rollback for every change.</li>
           </ul>
         </article>
