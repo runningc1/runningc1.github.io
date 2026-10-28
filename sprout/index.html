@@ -164,6 +164,20 @@ footer { margin-top: 64px; padding-top: 14px; border-top: 1px solid var(--rule);
     business or pricing data, customer data, or people's names and departures.
   -->
 
+  <section class="day" aria-labelledby="d-2026-10-27">
+    <h2 id="d-2026-10-27">Tuesday, October 27, 2026 <small>2026-10-27</small></h2>
+
+    <article class="item">
+      <h3>One-click export of a process map with everything attached to it <span class="tag live">Live</span></h3>
+      <p>A request from a recorded conversation: give the ID of one process map and get the map and all of its related records as one nested JSON document, ready to paste into a planning model. The page copies the whole document at once, or one table at a time, or downloads any table as a spreadsheet file.</p>
+      <ul>
+        <li>The export follows a fixed list of relations instead of every link in the database, so it never wanders into unrelated large tables, and it reads everything in a fixed number of queries however big the map is.</li>
+        <li>Testing on the largest real map found three problems before release: rich-text notes that ran as templates when read, related records that store their name under a different field, and records that ran extra queries every time they loaded. All three were fixed and covered by tests.</li>
+        <li>Shipped behind the same access rule as the map page itself, after staging and browser checks. A day of real use showed no errors.</li>
+      </ul>
+    </article>
+  </section>
+
   <section class="day" aria-labelledby="d-2026-10-26">
     <h2 id="d-2026-10-26">Monday, October 26, 2026 <small>2026-10-26</small></h2>
 
@@ -300,7 +314,7 @@ footer { margin-top: 64px; padding-top: 14px; border-top: 1px solid var(--rule);
     </article>
   </section>
 
-  <footer>Last updated 2026-10-26.</footer>
+  <footer>Last updated 2026-10-28.</footer>
 </div>
 </body>
 </html>
